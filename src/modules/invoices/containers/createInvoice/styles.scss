@@ -1,0 +1,37 @@
+.create-invoice {
+    .title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px 0 40px 0;
+    }
+    .invoice-search {
+        width: 600px;
+        margin: 0 auto;
+    }
+    .add-product {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        gap: 10px;
+        span {
+            margin: 0 10px;
+        }
+        input[type="number"] {
+            width: 50px;
+            height: 40px;
+            text-align: center;
+        }
+    }
+    h2 {
+        text-align: center;
+        margin: 40px 0;
+    }
+    .invoice-submit {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        gap: 20px;
+    
+    }
+}

@@ -1,0 +1,47 @@
+@import "variables.scss";
+
+body {
+  color: $text-color;
+  font-size: 16px;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+.main-container {
+  width: 100%;
+
+}
+
+main {
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 1280px;
+  margin: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.separator {
+  width: 90%;
+  height: 1px;
+  background: $color-primary;
+  margin: 40px auto;
+}

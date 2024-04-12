@@ -1,0 +1,28 @@
+@import "variables";
+
+button {
+  display: block;
+  background-color: $color-tertiary;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: lighten($color: $color-tertiary, $amount: 20);
+  }
+
+  &:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+  .cancel {
+    background-color: $color-primary;
+    &:hover {
+      background-color: darken($color: $color-primary, $amount: 20);
+    }
+  }
+}

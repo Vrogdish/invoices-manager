@@ -1,0 +1,7 @@
+.preview-invoice {
+  & .pdf-view {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+}

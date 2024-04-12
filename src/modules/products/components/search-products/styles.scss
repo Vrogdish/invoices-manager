@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+.search-bar { 
+    margin: 40px auto;
+    max-width: 600px;
+    position: relative;
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $color-primary;
+        border-radius: 5px;
+        font-size: 16px;
+        padding-right: 40px;
+    }
+    img {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
