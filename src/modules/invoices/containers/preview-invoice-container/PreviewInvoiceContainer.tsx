@@ -8,7 +8,17 @@ import { useProductsStore } from "@/core/store/Productstore";
 import { useCustomersStore } from "@/core/store/CustomersStore";
 import { ProductInterface } from "@/core/interfaces/product.interface";
 import InvoicesPDF from "../../components/invoices-pdf/InvoicesPdf";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+
+
+import dynamic from "next/dynamic";
+
+const PDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod. PDFDownloadLink),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  },
+);
 import "./styles.scss";
 
 export default function PreviewInvoiceContainer() {
