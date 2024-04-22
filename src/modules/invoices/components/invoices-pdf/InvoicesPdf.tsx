@@ -5,6 +5,7 @@ import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import { ProductInterface } from "@/core/interfaces/product.interface";
 import { CustomerInterface } from "@/core/interfaces/customer.interface";
 import { UserProfileInterface } from "@/core/interfaces/userProfile.interface";
+import { DocumentTypeEnum } from "@/core/store/InvoiceCreatorStore";
 
 const styles = StyleSheet.create({
   page: {
@@ -86,9 +87,10 @@ interface Props {
       quantity: number;
     }[];
     user : UserProfileInterface | null;
+    type : DocumentTypeEnum;
 }
 
-export default function InvoicesPDF({customerToPrint, productsToPrint, user}: Props) {
+export default function InvoicesPDF({customerToPrint, productsToPrint, user, type}: Props) {
   const totalHT = productsToPrint.reduce(
     (acc, product) =>
       acc + (product.product?.price ? product.product.price * product.quantity : 0),
@@ -101,7 +103,7 @@ export default function InvoicesPDF({customerToPrint, productsToPrint, user}: Pr
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.title}>Facture</Text>
+          <Text style={styles.title}>{type === DocumentTypeEnum.INVOICE ? "Facture" : "Devis" }</Text>
           <View style={styles.section}>
             <Text>Facture n° : 1</Text>
             <Text>Fait le : {new Date().toDateString()}</Text>

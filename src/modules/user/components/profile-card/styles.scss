@@ -1,0 +1,19 @@
+
+.card {
+    margin: 20px auto;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item {
+        display: flex;
+        gap: 10px;
+        & :first-child {
+          width: 120px;
+        }
+    }
+  
+}

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function AddCustomersForm({ className, handleReturn }: Props) {
-  const { uid } = useAuthStore();
+  const { user } = useAuthStore();
   const { addCustomer } = useCustomersStore();
 
   const {
@@ -23,8 +23,8 @@ export default function AddCustomersForm({ className, handleReturn }: Props) {
   } = useForm<CustomerFormInterface>();
 
   const onSubmit: SubmitHandler<CustomerFormInterface> = async (data) => {
-    if (!uid) return console.log("No user id found");
-    data.userId = uid;
+    if (!user?.uid) return console.log("No user id found");
+    data.userId = user.uid;
     await addCustomer(data);
     handleReturn();
   };

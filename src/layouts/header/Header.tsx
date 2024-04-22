@@ -37,7 +37,9 @@ export default function Header() {
 
   return (
     <header>
-      <h1>Gestion de factures</h1>
+      <Link href={"/"}>
+        <h1>Gestion de factures</h1>
+      </Link>
       <div>
         {user ? (
           <p className="sign-out-link" onClick={handleSignOut}>

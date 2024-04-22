@@ -1,9 +1,13 @@
 import { create } from "zustand";
-import { UserProfileInterface } from "../interfaces/userProfile.interface";
+import {
+  UserProfileFormInterface,
+  UserProfileInterface,
+} from "../interfaces/userProfile.interface";
 import { FirebaseError } from "firebase/app";
 import {
   firestoreAddUserProfile,
   firestoreGetUserProfile,
+  firestoreUpdateUserProfile,
 } from "../api/userProfileApi";
 import {
   FirebaseAuthSignUp,
@@ -11,6 +15,9 @@ import {
   firebaseAuthSignOut,
 } from "../auth/firebaseAuth";
 import { User } from "firebase/auth";
+import { useProductsStore } from "./Productstore";
+import { useCustomersStore } from "./CustomersStore";
+import { use } from "react";
 
 interface AuthState {
   loading: boolean;
@@ -25,6 +32,7 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (user: UserProfileInterface, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  udpateProfile: (profileData: UserProfileFormInterface) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -69,6 +77,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         set((state) => ({ ...state, error: response.error, loading: false }));
       } else {
         await get().loadProfile(response.data.uid);
+        await useProductsStore.getState().loadProducts(response.data.uid);
+        await useCustomersStore.getState().loadCustomers(response.data.uid);
       }
     } catch (error) {
       set((state) => ({
@@ -86,6 +96,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         set((state) => ({ ...state, error: auth.error, loading: false }));
       } else {
         await get().createProfile(user, auth.data);
+        await useProductsStore.getState().loadProducts(auth.data.uid);
+        await useCustomersStore.getState().loadCustomers(auth.data.uid);
       }
     } catch (error) {
       set((state) => ({
@@ -100,10 +112,47 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set((state) => ({ ...state, loading: true, error: null }));
       await firebaseAuthSignOut();
       set((state) => ({ ...state, user: null, loading: false }));
+      await useProductsStore.getState().loadProducts("");
+      await useCustomersStore.getState().loadCustomers("");
     } catch (error) {
       set((state) => ({
         ...state,
         error: "Une erreur s'est produite lors de la déconnexion.",
+        loading: false,
+      }));
+    }
+  },
+
+  udpateProfile: async (profileData: UserProfileFormInterface) => {
+    const profileId = get().user?.id;
+    if (!profileId) {
+      set((state) => ({
+        ...state,
+        error: "Impossible de mettre à jour le profil.",
+      }));
+      return;
+    }
+    try {
+      set((state) => ({ ...state, loading: true, error: null }));
+      const response = await firestoreUpdateUserProfile(profileData, profileId );
+      if (response.error) {
+        set((state) => ({ ...state, error: response.error, loading: false }));
+      } else {
+        const uid = get().user?.uid;
+        if (!uid) {
+          set((state) => ({
+            ...state,
+            error: "Impossible de mettre à jour le profil.",
+          }));
+          return;
+        }
+        await get().loadProfile(uid);
+        set((state) => ({ ...state, loading: false }));
+      }
+    } catch (error) {
+      set((state) => ({
+        ...state,
+        error: "Une erreur s'est produite lors de la mise à jour du profil.",
         loading: false,
       }));
     }

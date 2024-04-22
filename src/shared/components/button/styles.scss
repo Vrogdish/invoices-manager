@@ -1,6 +1,6 @@
 @import "variables";
 
-button {
+.my-btn {
   display: block;
   background-color: $color-tertiary;
   color: #fff;
@@ -19,10 +19,11 @@ button {
     background-color: lightgray;
     cursor: not-allowed;
   }
-  .cancel {
-    background-color: $color-primary;
-    &:hover {
-      background-color: darken($color: $color-primary, $amount: 20);
-    }
+}
+
+.cancel {
+  background-color: $color-primary;
+  &:hover {
+    background-color: darken($color: $color-primary, $amount: 20);
   }
 }

@@ -4,7 +4,7 @@ import "./globals.scss";
 import Sidebar from "@/layouts/sidebar/Sidebar";
 import Header from "@/layouts/header/Header";
 import Footer from "@/layouts/footer/Footer";
-import ProtectedRoute from "@/modules/auth/ProtectedRoute";
+import ProtectedRoute from "@/core/auth/ProtectedRoute";
 
 const inter = Inter({ subsets: ["latin"] });
 

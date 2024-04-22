@@ -5,7 +5,7 @@ import "./styles.scss";
 import Button from "@/shared/components/button/Button";
 import { useAuthStore } from "@/core/store/AuthStore";
 import { useRouter } from "next/navigation";
-import { UserProfileInterface } from "@/core/interfaces/userProfile.interface";
+import { CivilityEnum, UserProfileInterface } from "@/core/interfaces/userProfile.interface";
 
 type Inputs = {
   user: UserProfileInterface;
@@ -38,12 +38,24 @@ export default function SignUpForm() {
       <h2>Création de compte</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="sign-up-form">
         <div className="form-control">
-          <label htmlFor="firstname">Prénom :</label>
-          <input type="text" id="firstname" {...register("user.firstName")} />
+          <label htmlFor="company">Société :</label>
+          <input type="text" id="company" {...register("user.company")} />
         </div>
+        <div className="form-control">
+          <label htmlFor="civility">Civilité :</label>
+          <select id="civility" {...register("user.civility")}>
+            <option value={CivilityEnum.man}>Monsieur</option>
+            <option value={CivilityEnum.woman}>Madame</option>
+          </select>
+        </div>
+
         <div className="form-control">
           <label htmlFor="lastname">Nom :</label>
           <input type="text" id="lastname" {...register("user.lastName")} />
+        </div>
+        <div className="form-control">
+          <label htmlFor="firstname">Prénom :</label>
+          <input type="text" id="firstname" {...register("user.firstName")} />
         </div>
         <div className="form-control">
           <label htmlFor="email">Email :</label>
@@ -51,7 +63,7 @@ export default function SignUpForm() {
         </div>
         <div className="form-control">
           <label htmlFor="password">Mot de passe :</label>
-          <input type="password" id="password" {...register("password")} />{" "}
+          <input type="password" id="password" {...register("password")} />
         </div>
         <div className="submit">
           <Button theme="cancel" type="button" className="btn">

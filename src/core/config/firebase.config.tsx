@@ -2,16 +2,15 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { get } from "http";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDMj1iCvTwQJn8SIWHdz3tNqA7vHjaXKSs",
-  authDomain: "invoices-manager-f3507.firebaseapp.com",
-  projectId: "invoices-manager-f3507",
-  storageBucket: "invoices-manager-f3507.appspot.com",
-  messagingSenderId: "363155152062",
-  appId: "1:363155152062:web:fba421503e48311a3b92ef"
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
 

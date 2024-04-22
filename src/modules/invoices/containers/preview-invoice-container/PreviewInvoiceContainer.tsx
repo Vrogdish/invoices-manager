@@ -12,7 +12,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import "./styles.scss";
 
 export default function PreviewInvoiceContainer() {
-  const { customerSelectedID, productsSelected } = useInvoiceCreatorStore();
+  const { customerSelectedID, productsSelected, documentType } = useInvoiceCreatorStore();
   const { products } = useProductsStore();
   const { customers } = useCustomersStore();
   const { user } = useAuthStore();
@@ -35,6 +35,7 @@ export default function PreviewInvoiceContainer() {
       customerToPrint={customerToPrint}
       productsToPrint={productsToPrint}
       user={user}
+      type={documentType}
     />
   );
 

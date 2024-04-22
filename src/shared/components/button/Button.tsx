@@ -11,7 +11,7 @@ interface Props {
 
 export default function Button({ className, onClick, type, children,theme, disabled = false }: Props) {
   return (
-    <button onClick={onClick} className={`${theme} ${className}`} type={type} disabled={disabled} >
+    <button onClick={onClick} className={`my-btn ${theme} ${className}`} type={type} disabled={disabled} >
       {children}
     </button>
   );

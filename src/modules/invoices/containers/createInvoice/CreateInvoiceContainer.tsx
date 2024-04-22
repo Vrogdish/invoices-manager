@@ -5,13 +5,13 @@ import { useProductsStore } from "@/core/store/Productstore";
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
-import { useInvoiceCreatorStore } from "@/core/store/InvoiceCreatorStore";
+import {
+  DocumentTypeEnum,
+  useInvoiceCreatorStore,
+} from "@/core/store/InvoiceCreatorStore";
 import ProductSelectedTable from "../../components/product-Selected-table/ProductSelectedTable";
 import Button from "@/shared/components/button/Button";
 import Link from "next/link";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import PreviewInvoiceContainer from "../preview-invoice-container/PreviewInvoiceContainer";
-import InvoicesPDF from "../../components/invoices-pdf/InvoicesPdf";
 
 export default function CreateInvoiceContainer() {
   const [customerSearchList, setCustomerSearchList] = useState<
@@ -21,8 +21,14 @@ export default function CreateInvoiceContainer() {
     { label: string; value: string }[]
   >([]);
   const [productToAdd, setProductToAdd] = useState<string>("");
-  const { addCustomerID, addProduct, productsSelected, customerSelectedID } =
-    useInvoiceCreatorStore();
+  const {
+    addCustomerID,
+    addProduct,
+    productsSelected,
+    customerSelectedID,
+    resetStore,
+    documentType,
+  } = useInvoiceCreatorStore();
   const { customers } = useCustomersStore();
   const { products } = useProductsStore();
 
@@ -50,7 +56,10 @@ export default function CreateInvoiceContainer() {
 
   return (
     <div className="create-invoice">
-      <h1 className="title">Création de facture</h1>
+      <h1 className="title">
+        Création de{" "}
+        {documentType === DocumentTypeEnum.INVOICE ? "facture" : "devis"}
+      </h1>
       <form className="invoice-form">
         <div className="invoice-search">
           <Autocomplete
@@ -91,20 +100,32 @@ export default function CreateInvoiceContainer() {
             </Button>
           </div>
         </div>
-        <h2>Liste des produits ajouté à votre facture</h2>
+        <h2>
+          Liste des produits ajouté à votre{" "}
+          {documentType === DocumentTypeEnum.INVOICE ? "facture" : "devis"}
+        </h2>
         <ProductSelectedTable />
         <div className="invoice-submit">
-          <Button type="button" theme="cancel">
-            Annuler
-          </Button>
-          <Link href="/pdf-preview">
-            <Button type="button" theme="submit">
-              voir la facture
+          <Link href="/" onClick={() => resetStore()}>
+            <Button type="button" theme="cancel">
+              Annuler
             </Button>
           </Link>
-        
-
-         
+          <Link href="/pdf-preview">
+            <Button
+              type="button"
+              disabled={
+                !customerSelectedID || productsSelected.length === 0
+                  ? true
+                  : false
+              }
+            >
+              voir{" "}
+              {documentType === DocumentTypeEnum.INVOICE
+                ? "la facture"
+                : "le devis"}
+            </Button>
+          </Link>
         </div>
       </form>
     </div>

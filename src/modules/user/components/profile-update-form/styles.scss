@@ -1,0 +1,33 @@
+
+.update-card {
+    margin: 20px auto;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+
+    }
+    label {
+        width: 180px;
+    }
+    input {
+        width: 100%;  
+    }
+    .form-btn {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 40px ;
+        .btn {
+            width: 200px;
+        }
+    }
+}

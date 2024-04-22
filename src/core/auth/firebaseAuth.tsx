@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../config/firebase.config";
 
@@ -49,13 +50,11 @@ export const firebaseAuthSignOut = async () => {
 };
 
 interface AuthData {
-    auth: any; 
-    uid: string | null;
-  }
+  auth: any;
+  uid: string | null;
+}
 
-export const firebaseAuthCheck = async () :Promise<AuthData> => {
-  const auth = getAuth();
-
+export const firebaseAuthCheck = async (): Promise<AuthData> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,
@@ -72,4 +71,15 @@ export const firebaseAuthCheck = async () :Promise<AuthData> => {
       reject
     );
   });
+};
+
+export const firebaseResetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    console.log("reset password ok");
+    return { data: "reset password ok" };
+  } catch (error) {
+    console.log(error);
+    return { error: error as FirebaseError };
+  }
 };

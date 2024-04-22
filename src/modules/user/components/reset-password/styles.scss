@@ -1,0 +1,16 @@
+.forget-form {
+      max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+    position: relative;
+
+    .form-control{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      gap: 5px;
+    }
+}

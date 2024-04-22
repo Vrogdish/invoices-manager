@@ -3,7 +3,7 @@ export default function Home() {
   return (
    
       <main>
-        <h1>Hello World</h1>
+        <h2>Créer vos factures en quelques clics !</h2>
       </main>
 
   );

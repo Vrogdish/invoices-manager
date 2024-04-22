@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/modules/auth/ProtectedRoute";
+import ProtectedRoute from "@/core/auth/ProtectedRoute";
 import CustomersContainer from "@/modules/customers/containers/customers-container/CustomersContainer";
 
 export default function page() {

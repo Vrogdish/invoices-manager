@@ -14,7 +14,7 @@ export default function ProductSelectedTable() {
     return products.find((product) => product.id === productID);
   };
   return (
-   <div className="invoice-table">{productsSelected.length === 0 ? <p>Aucun produit sélectionné</p> : 
+   <div className="invoice-table">{productsSelected.length === 0 ? <p className="no-product">Aucun produit sélectionné</p> : 
       <table>
         <thead>
           <tr>
